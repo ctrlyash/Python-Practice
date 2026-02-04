@@ -106,3 +106,69 @@ def run_movie_db():
 
 if __name__ == "__main__":
     run_movie_db()
+
+
+# 🍿 MyMovieDB
+# 1. Add Movie
+# 2. View All Movies
+# 3. Search Movie
+# 4. Exit
+# Choose an option (1-4): 1
+# Enter the movie name: Border 2
+# Genre: Patriotism
+# Enter rating(0-10): 8
+# Movie added ✅
+
+# 🍿 MyMovieDB
+# 1. Add Movie
+# 2. View All Movies
+# 3. Search Movie
+# 4. Exit
+# Choose an option (1-4): 1
+# Enter the movie name: The Conjouring
+# Genre: Horror
+# Enter rating(0-10): 8
+# Movie added ✅
+
+# 🍿 MyMovieDB
+# 1. Add Movie
+# 2. View All Movies
+# 3. Search Movie
+# 4. Exit
+# Choose an option (1-4): 2
+# ------------------------------
+# border 2 -- patriotism -- 8.0
+# the conjouring -- horror -- 8.0
+# ------------------------------
+
+# 🍿 MyMovieDB
+# 1. Add Movie
+# 2. View All Movies
+# 3. Search Movie
+# 4. Exit
+# Choose an option (1-4): 3
+# Enter the title or genre: horror
+#  Found 1 result(s)
+# the conjouring -- horror -- 8.0
+
+# 🍿 MyMovieDB
+# 1. Add Movie
+# 2. View All Movies
+# 3. Search Movie
+# 4. Exit
+# Choose an option (1-4): 4
+
+
+# movies.json contents:
+# [
+#   {
+#     "title": "border 2",
+#     "genre": "patriotism",
+#     "rating": 8.0
+#   },
+#   {
+#     "title": "the conjouring",
+#     "genre": "horror",
+#     "rating": 8.0
+#   }
+# ]
