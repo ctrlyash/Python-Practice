@@ -26,7 +26,7 @@ import csv
 from datetime import datetime
 import requests
 FILENAME = "weather_log.csv"
-API_KEY = "c9b43c6f6f236fc863b6e8145cdb5e28"
+API_KEY = "YOUR_API_KEY"
 # keys are usually hidden in .env file but that is for later
 
 if not os.path.exists(FILENAME):
@@ -46,13 +46,14 @@ def log_weather():
               return
           
    try:
-       url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+       url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
        response = requests.get(url)
        data = response.json()
 
        if response.status_code != 200:
-           print(f"API Error ")
-           return
+         print("API Error:", data.get("message", "Unknown error"))
+         return
+
        temp = data["main"]["temp"]
        condition = data["weather"][0]["main"]
 
@@ -79,14 +80,64 @@ def main():
         print("Real time weather logger")
         print("1. Add weather log")
         print("2. View weather log")
+        print("3. Exit")
 
         choice = input("Choose an option: ").strip()
 
         match choice:
             case "1": log_weather()
             case "2": view_logs()
+            case "3": break
             case _: print("Invalid choice")
 
 
 if __name__ == "__main__":
     main()
+
+
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: 1
+# Enter your city name: delhi
+# Logged: 286.2 Mist in Delhi on 2026-02-06
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: jaipur
+# Invalid choice
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: 1
+# Enter your city name: jaipur
+# Logged: 287.77 Haze in Jaipur on 2026-02-06
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: 1
+# Enter your city name: mumbai
+# Logged: 301.14 Smoke in Mumbai on 2026-02-06
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: 2
+# 2026-02-06 : Delhi : 286.2 : Mist
+# 2026-02-06 : Jaipur : 287.77 : Haze
+# 2026-02-06 : Mumbai : 301.14 : Smoke
+# Real time weather logger
+# 1. Add weather log
+# 2. View weather log
+# 3. Exit
+# Choose an option: 3    
+
+# weather_log.csv content:
+# Date,City,Temperature,Condition
+# 2026-02-06,Delhi,286.2,Mist
+# 2026-02-06,Jaipur,287.77,Haze
+# 2026-02-06,Mumbai,301.14,Smoke
