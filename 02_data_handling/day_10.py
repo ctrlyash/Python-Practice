@@ -40,7 +40,7 @@ fernet = load_or_create_key()
 def load_vault():
     if not os.path.exists(VAULT_FILE):
         return []
-    with open(VAULT_FILE, "r", encoding="ut-8") as f:
+    with open(VAULT_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
     
 def save_vault(data):
@@ -48,8 +48,8 @@ def save_vault(data):
         json.dump(data, f, indent=2)  
 
 def add_note():
-    title = input("Enter note title").strip()          
-    content = input("Enter note content").strip()  
+    title = input("Enter note title: ").strip()          
+    content = input("Enter note content: ").strip()  
 
     encrypted_content = fernet.encrypt(content.encode()).decode()   
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
@@ -78,13 +78,13 @@ def view_note():
     list_notes()
     try:
         index = int(input("Enter note number to view: ")) - 1
-        data = load_vault
+        data = load_vault()
         if 0 <= index <= len(data):
             encrypted = data[index]["content"]
             decrypted = fernet.decrypt(encrypted.encode()).decode()
-            print(f"\n 📝 {data[index]["title"]} - {data[index]["timestamp"]} \n\n {decrypted}")
+            print(f"\n 📝 {data[index]['title']} - {data[index]['timestamp']} \n\n {decrypted}")
         else:
-            print("Invalid selection")    
+            print("Invalid selection")
     except:
         print("Invalid input")
 
@@ -120,8 +120,83 @@ if __name__ == "__main__":
     main()
 
 
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# Enter an option: 1
+# Enter note title: Python Practice
+# Enter note content: Encryption
+# ✅ Data saved
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# 5. Exit
+# Enter an option: 1
+# Enter note title: Python Practice 
+# Enter note content: Decryption
+# ✅ Data saved
 
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# 5. Exit
+# Enter an option: 2
+# 1. Python Practice 2026-02-11 00:14:20
+# 2. Python Practice 2026-02-11 00:20:16
 
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# 5. Exit
+# Enter an option: 3
+# 1. Python Practice 2026-02-11 00:14:20
+# 2. Python Practice 2026-02-11 00:20:16
+# Enter note number to view: 2
 
+# 📝 Python Practice - 2026-02-11 00:20:16
 
+#  Decryption
 
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# 5. Exit
+# Enter an option: 4     
+# Enter the keyword to search: python
+# Python Practice 2026-02-11 00:14:20
+# Python Practice 2026-02-11 00:20:16
+
+# 🔐 Offline Notes Locker
+# 1. Add Note
+# 2. List Notes
+# 3. View Note
+# 4. Search Note
+# 5. Exit
+# Enter an option: 5
+
+# notes_vault.json content:
+# [
+#   {
+#     "title": "Python Practice",
+#     "content": "gAAAAABpi3yEIp-iqRiD_FwQmWWiPwLX_vo8z6YaRy83fsTpCCDDIvN1MO6JfAHPoNPQeqPWcKcSdnRiunP6HhLLgJeXKefh-w==",
+#     "timestamp": "2026-02-11 00:14:20"
+#   },
+#   {
+#     "title": "Python Practice",
+#     "content": "gAAAAABpi33oQp25Njt5BjHi-VTnMYJW7JrHXeQFx8T2kMjdc76mIPVQJFA3AWYf2kesSeaiTyldJmgiMdseVDSDRBI1IjS9zA==",
+#     "timestamp": "2026-02-11 00:20:16"
+#   }
+# ]
+
+# vault.key content:
+# cT90j0ca4RE2FCmO7_BS14TcN9Dw4s-PSPdFJBTQzR0=
